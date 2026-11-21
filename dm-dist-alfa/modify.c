@@ -587,7 +587,7 @@ void check_reboot(void)
 	char dummy;
 	FILE *boot;
 
-	extern int shutting_down, reboot;
+	extern int shutting_down, reboot_game;
 
 	tc = time(0);
 	t_info = localtime(&tc);
@@ -624,7 +624,7 @@ void check_reboot(void)
 				}
 
 				send_to_all("Automatic reboot. Come back in a little while.\n\r");
-				shutting_down = reboot = 1;
+				shutting_down = reboot_game = 1;
 			}
 			else if (t_info->tm_min > 40)
 				send_to_all("ATTENTION: DikuMUD will reboot in 10 minutes.\n\r");

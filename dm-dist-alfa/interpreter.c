@@ -8,7 +8,15 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdio.h>
+#ifdef __APPLE__
+/* macOS has crypt() in <unistd.h> but no crypt_r()/struct crypt_data.
+   The server is single-threaded, so plain crypt() is safe here. */
+#include <unistd.h>
+struct crypt_data { char unused; };
+#define crypt_r(key, salt, data) ((void)(data), crypt((key), (salt)))
+#else
 #include <crypt.h>
+#endif
 #include "structs.h"
 #include "comm.h"
 #include "interpreter.h"

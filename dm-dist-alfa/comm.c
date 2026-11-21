@@ -58,7 +58,7 @@ struct descriptor_data *descriptor_list, *next_to_process;
 int lawful = 0;		/* work like the game regulator */
 int slow_death = 0;  /* Shut her down, Martha, she's sucking mud */
 int shutting_down = 0;    /* clean shutdown */
-int reboot = 0;      /* reboot the game after a shutdown */
+int reboot_game = 0;      /* reboot the game after a shutdown */
 int no_specials = 0; /* Suppress ass. of special routines */
 
 int maxdesc, avail_descs;
@@ -224,7 +224,7 @@ int run_the_game(int port)
 
 	PROFILE(monitor(0);)
 
-	if (reboot)
+	if (reboot_game)
 	{
 		slog("Rebooting.");
 		exit(52);            /* what's so great about HHGTTG, anyhow? */

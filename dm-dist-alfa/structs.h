@@ -4,7 +4,12 @@
 ************************************************************************* */
 
 #include <sys/types.h>
+#ifndef __APPLE__
 #include <crypt.h>
+#else
+/* Same value as libxcrypt on Linux, so player file records keep one layout */
+#define CRYPT_OUTPUT_SIZE 384
+#endif
 
 typedef signed char sbyte;
 typedef unsigned char ubyte;

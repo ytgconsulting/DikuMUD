@@ -6,7 +6,14 @@ CFLAGS+=-Wno-error=parentheses -Wno-error=return-type -Wno-error=dangling-else -
 # good, optional ideas!
 CFLAG+=-fsanitize=address -fno-omit-frame-pointer
 
+# macOS keeps crypt() in libc; Linux needs libcrypt
+ifneq ($(shell uname -s),Darwin)
 LDLIBS=-lcrypt
+else
+# Apple clang flags these 1990 idioms (pointer calls without prototypes,
+# list-walking loops with empty bodies); keep them as warnings
+CFLAGS+=-Wno-error=deprecated-non-prototype -Wno-error=empty-body
+endif
 HEADERFILES = structs.h utils.h comm.h interpreter.h db.h
 all: delplay dmserver
 

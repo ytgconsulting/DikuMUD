@@ -832,7 +832,7 @@ void do_shutdow(struct char_data *ch, char *argument, int cmd)
 
 void do_shutdown(struct char_data *ch, char *argument, int cmd)
 {
-	extern int shutting_down, reboot;
+	extern int shutting_down, reboot_game;
 	char buf[100], arg[MAX_INPUT_LENGTH];
 
 	if (IS_NPC(ch))
@@ -852,7 +852,7 @@ void do_shutdown(struct char_data *ch, char *argument, int cmd)
 		sprintf(buf, "Reboot by %s.", GET_NAME(ch));
 		send_to_all(buf);
 		slog(buf);
-		shutting_down = reboot = 1;
+		shutting_down = reboot_game = 1;
 	}
 	else
 		send_to_char("Go shut down someone your own size.\n\r", ch);

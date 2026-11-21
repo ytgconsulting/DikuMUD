@@ -1,0 +1,4 @@
+# Build outputs
+*.o
+dm-dist-alfa/dmserver
+dm-dist-alfa/delplay
